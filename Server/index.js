@@ -38,12 +38,19 @@ app.post("/api/task", (req, res) => {
 app.put("/api/task", (req, res) => {
     const { id, task, isCompleted } = req.body;
 
-    const [...originalKeys] = Object.keys(taskList[0]);
-    const [...reqKeys] = Object.keys(req.body);
+    const originalKeys = Object.keys(taskList[0]);
+    const reqKeys = Object.keys(req.body);
 
     if (!(JSON.stringify(originalKeys) === JSON.stringify(reqKeys))) {
+        let missingKeys = [];
+        originalKeys.forEach((element, index) => {
+            let key = (element !== reqKeys[index]) ? reqKeys[index] : "";
+            key && missingKeys.push(key)
+        });
+
         return res.status(400).json({
-            message: `${JSON.stringify(req.body)}: These attributes are not accepted, Required attributes are: ${originalKeys}`
+            message: `${JSON.stringify([...missingKeys])
+                }: These attributes are not accepted, Required attributes are: ${originalKeys}`
         });
     }
 
