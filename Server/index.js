@@ -42,17 +42,17 @@ app.put("/api/task", (req, res) => {
     const reqKeys = Object.keys(req.body);
 
     if (!(JSON.stringify(originalKeys) === JSON.stringify(reqKeys))) {
-        let missingKeys = [];
-        originalKeys.forEach((element, index) => {
-            let key = (element !== reqKeys[index]) ? reqKeys[index] : "";
-            key && missingKeys.push(key)
+        const missingKeys = reqKeys.filter((element, index) => {
+            return (originalKeys[index] !== element) ? reqKeys[index] : "";
         });
 
         return res.status(400).json({
             message: `${JSON.stringify([...missingKeys])
                 }: These attributes are not accepted, Required attributes are: ${originalKeys}`
         });
-    }
+
+    };
+
 
     const isExists = taskList.find((taskItem) => taskItem.id === id);
 
