@@ -1,0 +1,49 @@
+button {
+  cursor: pointer;
+}
+
+.add-todo-container .add-button,
+.edit-todo-container .add-button,
+.cancel-button {
+  padding: 12px 14px;
+  width: 95px;
+  height: 40px;
+  background: #0c5488;
+  border-radius: 4px;
+  color: #8fa8c1;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.add-todo-container .add-button:hover {
+  color: #eeeeee;
+}
+
+.todo-list-container button {
+  width: 30px;
+  height: 30px;
+}
+
+.todo-list-container button:focus {
+  outline: none;
+  border: none;
+}
+
+.todo-list-container .edit-button {
+  background-image: url("../src/assets/images/editButtonImg.png");
+  background-color: inherit;
+  background-repeat: no-repeat;
+}
+
+.todo-list-container .delete-button {
+  background-image: url("../src/assets/images/deleteImg.png");
+  background-color: inherit;
+  background-repeat: no-repeat;
+  padding: 5px;
+}
+
+.cancel-button {
+  background-color: #8fa8c1;
+  color: #0c5488;
+}

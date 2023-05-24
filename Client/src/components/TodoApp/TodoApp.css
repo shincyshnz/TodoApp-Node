@@ -1,0 +1,80 @@
+.todo-container {
+  margin: 66px auto;
+  padding: 10px;
+  background-color: #152431;
+  color: #8fa8c1;
+  width: 500px;
+  height: 612px;
+  /* height: min-content; */
+  border-radius: 6px;
+  box-shadow: 6px 6px 6px 6px black;
+  overflow-y: auto;
+}
+
+.todo-container h1 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  margin: 27px;
+}
+
+.todo-inner-container {
+  margin-inline: 30px;
+}
+
+.todo-inner-container .add-todo-container,
+.todo-inner-container .edit-todo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.todo-inner-container .error-container {
+  font-size: 12px;
+  font-weight: normal;
+  margin: 10px 10px;
+  color: #f96060;
+  height: 40px;
+}
+.todo-list-main-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.todo-inner-container .todo-list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  padding: 30px 8px;
+  width: 100%;
+  border-bottom: 1px dashed rgba(143, 168, 193, 0.3);
+}
+
+.todo-list-container .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 0 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px 152431;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(74, 74, 74);
+  border-radius: 10px;
+}
