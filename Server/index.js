@@ -83,7 +83,7 @@ app.delete("/api/task", (req, res) => {
     }
 
     taskList.splice(taskIndex, 1);
-    res.status(202).json(taskList);
+    res.status(203).json(taskList);
 });
 
 app.all("*", (req, res) => {
