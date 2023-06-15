@@ -3,8 +3,9 @@ import "./TodoApp.css";
 import { Buttons } from "./Buttons/Buttons";
 import { Input } from "./Input/Input";
 import { TodoList } from "./TodoList/TodoList";
-import { v4 as uuid } from "uuid";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = "http://localhost:3010/api/task";
 
@@ -50,6 +51,7 @@ export const TodoApp = () => {
 
   // Handling Button click Event for adding new todo
   const onClickEventAdd = async (event) => {
+    setEditInputObj({});
     event.preventDefault();
     if (errorInputField.addInput.errorMessage) {
       return;
@@ -62,13 +64,13 @@ export const TodoApp = () => {
           task: inputValue.addInput,
         },
       });
-      setTodos(response.data);
+      setTodos((todo) => [response.data, ...todo]);
       setInputValue((prev) => ({
         ...prev,
         addInput: "",
       }));
+      toast.success("Task added successfully");
     } catch (err) {
-      console.log(err.response);
       setErrorInputField((prev) => ({
         ...prev,
         apiError: {
@@ -80,18 +82,24 @@ export const TodoApp = () => {
 
   // Handling Button click Event for Deleting existing todo
   const onClickEventDelete = async (event, todoId) => {
+    setEditInputObj({});
     event.preventDefault();
 
     try {
       const response = await axios(API_URL, {
         method: "DELETE",
         data: {
-          id: todoId,
+          _id: todoId,
         },
       });
-      setTodos(response.data);
+      const tempTodos = [...todos];
+      tempTodos.splice(
+        tempTodos.findIndex((todo) => todo._id === response.data._id),
+        1
+      );
+      setTodos(tempTodos);
+      toast.success(`Task deleted successfully`);
     } catch (err) {
-      console.log(err.response);
       setErrorInputField((prev) => ({
         ...prev,
         apiError: {
@@ -105,7 +113,7 @@ export const TodoApp = () => {
   const onClickEventEdit = (event, todoId) => {
     event.preventDefault();
 
-    const found = todos.find((todo) => todo.id === todoId);
+    const found = todos.find((todo) => todo._id === todoId);
     setInputValue((prev) => ({
       ...prev,
       editInput: found.task,
@@ -117,7 +125,15 @@ export const TodoApp = () => {
   // Handling Button click Event for cancel Edit
   const onClickEventCancel = (event) => {
     event.preventDefault();
-
+    setErrorInputField((prev) => ({
+      ...prev,
+      editInputObj: {
+        errorMessage: "",
+      },
+      addInputObj: {
+        errorMessage: "",
+      },
+    }));
     setEditInputObj({});
   };
 
@@ -131,15 +147,22 @@ export const TodoApp = () => {
       const response = await axios(API_URL, {
         method: "PUT",
         data: {
-          id: editInputObj.id,
+          _id: editInputObj._id,
           task: inputValue.editInput,
           isCompleted: editInputObj.isCompleted,
         },
       });
-      setTodos(response.data);
+      // Update todos with updated Data from Database
+      const tempTodos = todos.map((todo) => {
+        if (todo._id === response.data._id) {
+          todo = response.data;
+        }
+        return todo;
+      });
+      setTodos(tempTodos);
       setEditInputObj({});
+      toast.success("Task Updated successfully");
     } catch (err) {
-      console.log(err.response);
       setErrorInputField((prev) => ({
         ...prev,
         editInput: {
@@ -154,14 +177,19 @@ export const TodoApp = () => {
       const response = await axios(API_URL, {
         method: "PUT",
         data: {
-          id: todo.id,
+          _id: todo._id,
           task: todo.task,
           isCompleted: !todo.isCompleted,
         },
       });
-      setTodos(response.data);
+      const tempTodos = todos.map((todo) => {
+        if (todo._id === response.data._id) {
+          todo.isCompleted = response.data.isCompleted;
+        }
+        return todo;
+      });
+      setTodos(tempTodos);
     } catch (err) {
-      console.log(err.response);
       setErrorInputField((prev) => ({
         ...prev,
         editInput: {
@@ -182,13 +210,13 @@ export const TodoApp = () => {
             classNameText={"edit-button"}
             onClickEvent={onClickEventEdit}
             buttonText={""}
-            todoid={todo.id}
+            todoid={todo._id}
           />
           <Buttons
             classNameText={"delete-button"}
             onClickEvent={onClickEventDelete}
             buttonText={""}
-            todoid={todo.id}
+            todoid={todo._id}
           />
         </div>
       </div>
@@ -198,13 +226,13 @@ export const TodoApp = () => {
   return (
     <div className="todo-container">
       <div className="todo-inner-container" ref={inputRef}>
-        <h1>Todo List</h1>
+        <h1>Task Manager</h1>
         <div className="add-todo-container">
           <Input
             type={"text"}
             className={"add-input"}
             name={"addInput"}
-            placeholderText={"New Todo"}
+            placeholderText={"New Task"}
             setInputValue={setInputValue}
             setErrorInputField={setErrorInputField}
             inputValue={inputValue.addInput}
@@ -232,7 +260,7 @@ export const TodoApp = () => {
             return renderTodoList(todo, index);
           })}
 
-        {editInputObj.id && (
+        {editInputObj._id && (
           <div className="edit-todo-container">
             <Input
               type={"text"}
@@ -247,18 +275,18 @@ export const TodoApp = () => {
               classNameText={"add-button"}
               onClickEvent={onClickEventSave}
               buttonText={"SAVE"}
-              todoid={editInputObj.id}
+              todoid={editInputObj._id}
             />
             <Buttons
               classNameText={"cancel-button"}
               onClickEvent={onClickEventCancel}
               buttonText={"CANCEL"}
-              todoid={editInputObj.id}
+              todoid={editInputObj._id}
             />
           </div>
         )}
 
-        {
+        {editInputObj._id && (
           <div className="error-container">
             {errorInputField.editInput.errorMessage && (
               <label className="error-input">
@@ -266,8 +294,9 @@ export const TodoApp = () => {
               </label>
             )}
           </div>
-        }
+        )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

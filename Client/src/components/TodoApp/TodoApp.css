@@ -55,6 +55,7 @@
   padding: 30px 8px;
   width: 100%;
   border-bottom: 1px dashed rgba(143, 168, 193, 0.3);
+  cursor: pointer;
 }
 
 .todo-list-container .button-container {
