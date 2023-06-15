@@ -52,10 +52,10 @@ You can add,edit and delete any task. The task details are stored in MongoDb.
 
 ![](app-screenshot-2.png)
 
-## Delete Task
-
-![](app-screenshot-4.png)
-
 ## Mark As Completed by clicking on the Task
 
 ![](app-screenshot-3.png)
+
+## Delete Task
+
+![](app-screenshot-4.png)
