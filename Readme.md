@@ -46,16 +46,16 @@ You can add,edit and delete any task. The task details are stored in MongoDb.
 
 ## Add Task
 
-[app-screenshot-1.png]
+![](app-screenshot-1.png)
 
 ## Edit Task
 
-[app-screenshot-2.png]
+![](app-screenshot-2.png)
 
 ## Delete Task
 
-[app-screenshot-4.png]
+![](app-screenshot-4.png)
 
 ## Mark As Completed by clicking on the Task
 
-[app-screenshot-3.png]
+![](app-screenshot-3.png)
