@@ -35,7 +35,7 @@ export const TodoApp = () => {
   const fetchTodos = async () => {
     try {
       const response = await axios(API_URL);
-      setTodos(response.data);
+      setTodos(response?.data);
     } catch (err) {
       setErrorInputField((prev) => ({
         ...prev,
