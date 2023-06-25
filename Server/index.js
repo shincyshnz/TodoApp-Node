@@ -19,4 +19,4 @@ app.all("*", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3005;
-app.listen(PORT, () => { console.log(`Server started at http://localhost:${PORT} `) });
+app.listen(PORT, () => { console.log(`Server started at ${PORT} `) });

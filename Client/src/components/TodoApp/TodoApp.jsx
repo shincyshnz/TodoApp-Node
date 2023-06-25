@@ -7,7 +7,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "http://localhost:3010/api/task";
+// const API_URL = "http://localhost:3010/api/task";
+const API_URL = "https://todo-app-node-server.vercel.app/api/task";
 
 export const TodoApp = () => {
   const inputRef = useRef(null);
