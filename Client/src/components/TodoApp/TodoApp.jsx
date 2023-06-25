@@ -40,7 +40,7 @@ export const TodoApp = () => {
       setErrorInputField((prev) => ({
         ...prev,
         apiError: {
-          errorMessage: err.response.data.message,
+          errorMessage: err.message,
         },
       }));
     }
