@@ -3,16 +3,35 @@ const router = express.Router();
 const TaskModel = require("../models/taskModel");
 const taskModel = require("../models/taskModel");
 
-router.get("/", async (req, res) => {
+async function within(fn, res, duration) {
+    const id = setTimeout(() => res.json({
+        message: "There was an error with the upstream service!"
+    }), duration)
+
     try {
-        const taskLists = await TaskModel.find();
-        // .select("task isCompleted").sort({ updatedAt: "desc" })
-        res.status(200).json(taskLists);
-    } catch (error) {
-        res.status(400).json({
-            message: error.message,
-        });
+        let data = await fn()
+        clearTimeout(id)
+        res.json(data)
+    } catch (e) {
+        res.status(500).json({ message: e.message })
     }
+}
+
+async function getTaskLists() {
+    return (await TaskModel.find().select("task isCompleted"));
+}
+
+router.get("/", async (req, res) => {
+    await within(getTaskLists, res, 7000)
+    // try {
+    //     const taskLists = await TaskModel.find().select("task isCompleted");
+    //     // .sort({ updatedAt: "desc" })
+    //     res.status(200).json(taskLists);
+    // } catch (error) {
+    //     res.status(400).json({
+    //         message: error.message,
+    //     });
+    // }
 });
 
 router.post("/", async (req, res) => {
