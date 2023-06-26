@@ -22,7 +22,7 @@ async function getTaskLists() {
 }
 
 router.get("/", async (req, res) => {
-    await within(getTaskLists, res, 7000)
+    await within(getTaskLists, res, 10000)
     // try {
     //     const taskLists = await TaskModel.find().select("task isCompleted");
     //     // .sort({ updatedAt: "desc" })
