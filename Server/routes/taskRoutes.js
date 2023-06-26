@@ -5,9 +5,8 @@ const taskModel = require("../models/taskModel");
 
 router.get("/", async (req, res) => {
     try {
-        // const taskLists = await TaskModel.find().select("task isCompleted").sort({ updatedAt: "desc" });
-        // res.status(200).json(taskLists);
-        res.status(200).json("hai");
+        const taskLists = await TaskModel.find().select("task isCompleted").sort({ updatedAt: "desc" });
+        res.status(200).json(taskLists);
     } catch (error) {
         res.status(400).json({
             message: error.message,
