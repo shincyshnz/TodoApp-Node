@@ -12,11 +12,13 @@ app.use(express.json());
 
 connectDb();
 
+// app.get("/", "Server Connected");
 app.use("/api/task", taskRoute);
 
-app.all("*", (req, res) => {
-    res.status(404).json("This page does not exists")
-});
+
+// app.all("*", (req, res) => {
+//     res.status(404).json("This page does not exists")
+// });
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => { console.log(`Server started at ${PORT} `) });
