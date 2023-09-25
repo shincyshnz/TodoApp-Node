@@ -8,7 +8,7 @@ const taskRoute = require("./routes/taskRoutes");
 const app = express();
 
 var corsOptions = {
-    origin: '*',
+    origin: "https://todo-app-node-sigma.vercel.app",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
