@@ -18,6 +18,7 @@ app.use(cors(corsOptions));
 connectDb();
 
 app.use("/api/task", taskRoute);
+app.get("/test","success");
 
 
 app.all("*", (req, res) => {
