@@ -3,6 +3,11 @@
 Simple task manager app to help users to stay organized for their day to day tasks. This app is developed using React and NodeJS with error handling.
 You can add,edit and delete any task. The task details are stored in MongoDb.
 
+## Demo
+[https://todo-app-node-sigma.vercel.app/](https://todo-app-node-sigma.vercel.app/)
+
+<!-- #### Note : FrontEnd hosted in vercel and Backend in render -->
+
 ## Technologies
 
 - REACT
