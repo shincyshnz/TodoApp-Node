@@ -31,7 +31,7 @@ button {
 }
 
 .todo-list-container .edit-button {
-  background-image: url("../../../assets/images/deleteImg.png");
+  background-image: url("../../../assets/images/editButtonImg.png");
   background-color: inherit;
   background-repeat: no-repeat;
 }
