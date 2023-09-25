@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 const connectDb = require("./config/db");
 const taskRoute = require("./routes/taskRoutes");
@@ -18,9 +18,9 @@ app.get("/test",(req,res)=>{
 });
 
 
-// app.all("/*", (req, res) => {
-//     res.status(404).json("This page does not exists")
-// });
+app.all("/*", (req, res) => {
+    res.status(404).json("This page does not exists")
+});
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => { console.log(`Server started at ${PORT} `) });
