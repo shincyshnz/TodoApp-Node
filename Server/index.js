@@ -21,9 +21,9 @@ app.use("/api/task", taskRoute);
 app.get("/test","success");
 
 
-app.all("*", (req, res) => {
-    res.status(404).json("This page does not exists")
-});
+// app.all("/*", (req, res) => {
+//     res.status(404).json("This page does not exists")
+// });
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => { console.log(`Server started at ${PORT} `) });
