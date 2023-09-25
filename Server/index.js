@@ -7,10 +7,10 @@ const taskRoute = require("./routes/taskRoutes");
 
 const app = express();
 
-var corsOptions = {
-    origin: "https://todo-app-node-sigma.vercel.app",
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+// var corsOptions = {
+//     origin: "https://todo-app-node-sigma.vercel.app",
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   }
 
 app.use(express.json());
 app.use(cors(corsOptions));
